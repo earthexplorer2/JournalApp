@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/entryListFragment">
+
+  <fragment
+      android:id="@+id/entryListFragment"
+      android:name="androidsamples.java.journalapp.EntryListFragment"
+      android:label="fragment_entry_list"
+      tools:layout="@layout/fragment_entry_list">
+
+    <!-- Action to navigate to EntryDetailsFragment without parameters -->
+    <action
+        android:id="@+id/addEntryAction"
+        app:destination="@id/entryDetailsFragment">
+    <argument
+        android:name="type"
+        app:argType="boolean"/>
+    </action>
+
+    <!-- Action to navigate to EntryDetailsFragment with an entryId parameter -->
+    <action
+        android:id="@+id/viewEntryAction"
+        app:destination="@id/entryDetailsFragment">
+      <argument
+        android:name="type"
+        app:argType="boolean"/>
+      <argument
+          android:name="entryId"
+          app:argType="string" />
+    </action>
+  </fragment>
+
+  <fragment
+      android:id="@+id/entryDetailsFragment"
+      android:name="androidsamples.java.journalapp.EntryDetailsFragment"
+      android:label="fragment_entry_details"
+      tools:layout="@layout/fragment_entry_details">
+
+    <argument
+        android:name="entryId"
+        android:defaultValue='""'
+        app:argType="string" />
+    <argument
+        android:name="type"
+        android:defaultValue='false'
+        app:argType="boolean" />
+
+    <action
+        android:id="@+id/datePickerAction"
+        app:destination="@id/datePickerDialog">
+      <argument
+          android:name="addOrUpdate"
+          app:argType="boolean" />
+      <argument
+          android:name="date"
+          app:argType="long" />
+    </action>
+
+    <action
+        android:id="@+id/timePickerAction"
+        app:destination="@id/timePickerDialog">
+      <argument
+          android:name="addOrUpdate"
+          app:argType="boolean" />
+      <argument
+          android:name="date"
+          app:argType="long" />
+      <argument
+          android:name="startOrEnd"
+          app:argType="boolean"/>
+    </action>
+  </fragment>
+
+  <dialog
+      android:id="@+id/datePickerDialog"
+      android:name="androidsamples.java.journalapp.DatePickerFragment" >
+    <argument
+      android:name="addOrUpdate"
+      android:defaultValue='false'
+      app:argType="boolean" />
+    <argument
+        android:name="date"
+        app:argType="long" />
+  </dialog>
+
+  <dialog
+      android:id="@+id/timePickerDialog"
+      android:name="androidsamples.java.journalapp.TimePickerFragment" >
+    <argument
+        android:name="addOrUpdate"
+        android:defaultValue='false'
+        app:argType="boolean" />
+    <argument
+        android:name="date"
+        app:argType="long" />
+    <argument
+        android:name="startOrEnd"
+        app:argType="boolean"/>
+  </dialog>
+</navigation>
